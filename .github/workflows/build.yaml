@@ -1,0 +1,28 @@
+name: Java CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: 
+          - ubuntu-22.04
+          - ubuntu-20.04
+          - macos-12
+            #- windows-2019
+        java-version:
+          - 8
+        java-distribution:
+          - corretto
+          - temurin
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: ${{ matrix.java-distribution }}
+      - name: Build with Maven
+        run: mvn clean install
