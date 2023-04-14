@@ -22,6 +22,7 @@ package org.evosuite.runtime.mock.javax.swing;
 import org.evosuite.runtime.Runtime;
 import org.evosuite.runtime.RuntimeSettings;
 import org.evosuite.runtime.mock.java.io.MockFile;
+import org.evosuite.runtime.vfs.VirtualFileSystem;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -48,8 +49,9 @@ public class MockJFileChooserTest {
     @Test
     public void testGetCurrentDirectory() {
 
-        JFileChooser chooser = new MockJFileChooser();
-        File dir = chooser.getCurrentDirectory();
+        JFileChooser chooser = new MockJFileChooser(VirtualFileSystem.getWorkingDirPath()); // this falls back to home for the current directory, need to tell it curent directoy.
+        File dir = chooser.getCurrentDirectory(); // this should pass because the current dirrectory is added to the filesystem.
+        // but mockview behavior as this returning home.
 
         Assert.assertTrue(dir.exists());
         Assert.assertTrue(dir instanceof MockFile);

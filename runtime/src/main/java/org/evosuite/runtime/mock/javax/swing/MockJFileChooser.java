@@ -231,7 +231,7 @@ public class MockJFileChooser extends  javax.swing.JFileChooser  implements Over
 		}
 
 		File prev = null;
-		while (!isTraversable(dir) && prev != dir) {
+		while (!isTraversable(dir) && prev != dir) {  // get to the first traversable parent director or roo.
 			prev = dir;
 			dir = getFileSystemView().getParentDirectory(dir);
 		}

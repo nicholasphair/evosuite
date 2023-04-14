@@ -273,6 +273,7 @@ public abstract class MockFileSystemView extends FileSystemView  implements Over
 
 	@Override
 	public File getHomeDirectory() {
+		// this doesnt make sense to do when we are returning mock files based on a vfs
 		return super.getHomeDirectory();
 	}
 
